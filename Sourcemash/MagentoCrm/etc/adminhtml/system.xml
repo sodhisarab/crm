@@ -1,0 +1,57 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="sourcemash_extensions" translate="label" sortOrder="2000">
+            <label>SourceMash</label>
+        </tab>
+        <section id="sm_magentocrm" showInDefault="1" showInWebsite="0" showInStore="1" sortOrder="50" translate="label">
+            <label>Magento CRM Integration</label>
+            <tab>sourcemash_extensions</tab>
+            <resource>Sourcemash_MagentoCrm::config</resource>
+            <group id="general" translate="label comment" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="1">
+                <label>General</label>                
+                <field id="enabled_integration" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Integration</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>                    
+                </field>
+                <field id="api_url" translate="label comment" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1" >
+                    <label>Dynamic CRM URL</label>
+                    <comment>Enter the URL of CRM</comment>
+                    <depends>
+                        <field id="enabled_integration">1</field>
+                    </depends>
+                </field>
+                <field id="api_username" translate="label" type="text" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>CRM UserName</label>                    
+                    <validate>required-entry validate-no-html-tags</validate>
+                    <depends>
+                        <field id="enabled_integration">1</field>
+                    </depends>
+                </field>  
+                <field id='api_password' translate='label' type='password' sortOrder='4' showInDefault='1'
+                       showInWebsite='1' showInStore='1'>
+                   <label>CRM Password</label>
+                   <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                   <depends>
+                        <field id="enabled_integration">1</field>
+                    </depends>
+                </field> 
+                 <field id="api_method" translate="label" type="select" sortOrder="5" showInDefault="1"
+                        showInWebsite="1" showInStore="1">
+                    <label>Select Method</label>
+                    <source_model>Sourcemash\MagentoCrm\Model\Config\Custom</source_model>
+                    <depends>
+                        <field id="enabled_integration">1</field>
+                </depends>
+                </field>   
+                <field id="button_connection" translate="label" type="button" sortOrder="6" showInDefault="1" showInWebsite="1" showInStore="1">                
+                <frontend_model>Sourcemash\MagentoCrm\Block\System\Config\Button</frontend_model>
+                <depends>
+                        <field id="enabled_integration">1</field>
+                </depends>
+                </field>
+                          
+            </group>
+        </section>
+    </system>
+</config>
